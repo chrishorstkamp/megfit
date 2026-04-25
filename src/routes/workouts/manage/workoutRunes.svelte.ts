@@ -24,17 +24,18 @@ function createWorkoutRunes() {
 	let exerciseWarmUpDialogOpen = $state(false);
 	let exerciseWarmUpDialogExercise: WorkoutExerciseInProgress | undefined = $state();
 
-	if (globalThis.localStorage) {
-		const savedState = localStorage.getItem('workoutRunes');
-		if (savedState) ({ workoutData, workoutExercises, previousWorkoutData } = JSON.parse(savedState));
-	}
+	if (typeof window !== 'undefined' && window.localStorage) {
+	const savedState = window.localStorage.getItem('workoutRunes');
+	if (savedState) ({ workoutData, workoutExercises, previousWorkoutData } = JSON.parse(savedState));
+}
 
-	function saveStoresToLocalStorage() {
-		localStorage.setItem(
-			'workoutRunes',
-			JSON.stringify({ workoutData, workoutExercises, editingWorkoutId, previousWorkoutData })
-		);
-	}
+function saveStoresToLocalStorage() {
+	if (typeof window === 'undefined' || !window.localStorage) return;
+	window.localStorage.setItem(
+		'workoutRunes',
+		JSON.stringify({ workoutData, workoutExercises, editingWorkoutId, previousWorkoutData })
+	);
+}
 
 	function resetStores() {
 		workoutData = null;

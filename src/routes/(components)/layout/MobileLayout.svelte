@@ -12,6 +12,7 @@
 
 	import MenuIcon from 'virtual:icons/lucide/menu';
 	import LoaderCircle from 'virtual:icons/lucide/loader-circle';
+	import HeartIcon from 'virtual:icons/lucide/heart';
 	import { navigating, page } from '$app/stores';
 	import type { Snippet } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -34,25 +35,29 @@
 					}}
 				>
 					<Button class="pointer-events-none justify-start gap-2 text-foreground" variant="link">
-						<img alt="MyFit logo" height={52} src="/favicon.webp" width={52} />
-						<h1 class="text-2xl font-bold">MyFit</h1>
+						<HeartIcon class="text-primary h-10 w-10" /> 
+						<h1 class="text-2xl font-bold">MegFit</h1>
 					</Button>
 				</Sheet.Title>
 			</Sheet.Header>
 			<NavLinks bind:sheetOpen />
 		</Sheet.Content>
 	</Sheet.Root>
-	<a class="mx-1 mr-auto" href="/">
+
+	<a class="mx-1 mr-auto flex items-center gap-2" href="/">
 		{#if $navigating}
 			<div class="flex h-10 w-10 items-center justify-center">
 				<LoaderCircle class="animate-spin text-primary" height={24} width={24} />
 			</div>
 		{:else}
-			<img alt="MyFit logo" height={40} src="/favicon.webp" width={40} />
+			<HeartIcon class="text-primary h-8 w-8" />
+			<span class="text-lg font-bold">MegFit</span>
 		{/if}
 	</a>
+
 	<PWAButtons isMobile={true} />
 	<ModeToggle />
+
 	{#if $page.data.session}
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
@@ -71,6 +76,7 @@
 		</DropdownMenu.Root>
 	{/if}
 </header>
+
 <main class="mx-auto flex h-px w-full max-w-2xl grow flex-col overflow-y-auto px-2 pb-2 pt-6">
 	{@render children()}
 </main>

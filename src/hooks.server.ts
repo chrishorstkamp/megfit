@@ -30,4 +30,21 @@ const trpcHandle = createTRPCHandle({
 		console.error(`Encountered error while trying to process ${type} @ ${path}:`, error)
 });
 
-export const handle = sequence(authHandle, trpcHandle);
+const meganMode: any = async ({ event, resolve }) => {
+	const user = {
+		id: "txdfz3nduruk0ajgbubukgpx",
+		name: "Megan",
+		email: "megan@example.com",
+	};
+
+	event.locals.user = user;
+	event.locals.session = { user, userId: user.id };
+	
+	// These two lines satisfy the "Internal Error" you're seeing
+	event.locals.auth = async () => event.locals.session;
+	event.locals.getSession = async () => event.locals.session;
+
+	return resolve(event);
+};
+
+export const handle = sequence(meganMode, trpcHandle);

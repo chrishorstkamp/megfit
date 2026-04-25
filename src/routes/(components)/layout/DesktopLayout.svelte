@@ -10,6 +10,7 @@
 	import PWAButtons from './PWAButtons.svelte';
 
 	import LoaderCircle from 'virtual:icons/lucide/loader-circle';
+	import HeartIcon from 'virtual:icons/lucide/heart';
 	import { navigating, page } from '$app/stores';
 	import type { Snippet } from 'svelte';
 
@@ -23,15 +24,18 @@
 				<LoaderCircle class="animate-spin text-primary" height={48} width={48} />
 			</div>
 		{:else}
-			<img alt="MyFit logo" height={72} src="/favicon.webp" width={72} />
+			<HeartIcon class="text-primary h-10 w-10" /> 
+			<h1 class="text-2xl font-bold">MegFit</h1>
 		{/if}
-		<h1 class="text-4xl font-bold">MyFit</h1>
 	</Button>
+
 	<NavLinks />
-	<div class="flex gap-1">
+
+	<div class="flex gap-1 mt-auto pb-4">
 		<ModeToggle size="lg" variant="outline" />
 		<PWAButtons isMobile={false} />
 	</div>
+
 	{#if $page.data.session}
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild let:builder>
@@ -51,6 +55,7 @@
 		</DropdownMenu.Root>
 	{/if}
 </header>
+
 <main class="mx-auto flex h-screen w-full max-w-2xl flex-col overflow-y-auto px-2 pb-2 pt-6">
 	{@render children()}
 </main>

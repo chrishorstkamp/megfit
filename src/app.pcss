@@ -3,69 +3,32 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 0 0% 3.9%;
+  /* This covers Light Mode */
+  :root {
+    --background: 327 100% 94%; /* The pale pastel pink you wanted */
+    --foreground: 327 95% 10%; /* Dark plum text for readability */
 
-		--primary: 211.56 61.6% 45.02%;
-		--primary-foreground: 0 0% 100%;
+    --primary: 327 100% 55%; /* Bright Barbie Pink buttons */
+    --primary-foreground: 0 0% 100%;
 
-		--card: 0 0% 100%;
-		--card-foreground: 212 60% 4.9%;
+    --card: 327 100% 90%; 
+    --card-foreground: 327 95% 10%;
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 212 60% 4.9%;
+    --border: 327 100% 85%;
+    --input: 327 100% 85%;
+    --ring: 327 100% 55%;
+    --radius: 1.25rem;
+  }
 
-		--secondary: 211.3 58.97% 92.35%;
-		--secondary-foreground: 0 0% 0%;
-
-		--muted: 210 61.54% 94.9%;
-		--muted-foreground: 0 0% 40%;
-
-		--accent: 210 61.54% 94.9%;
-		--accent-foreground: 211.56 61.6% 49.02%;
-
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 210 40% 98%;
-
-		--border: 0 0% 90.2%;
-		--input: 0 0% 90.2%;
-		--ring: 211.56 61.6% 49.02%;
-
-		--radius: 0.5rem;
-	}
-
-	.dark {
-		--background: 0 0% 3.9%;
-		--foreground: 0 0% 98%;
-
-		--primary: 211.56 61.6% 45.02%;
-		--primary-foreground: 0 0% 100%;
-
-		--card: 0 0% 0%;
-		--card-foreground: 211.3 58.97% 92.35%;
-
-		--popover: 0 0% 0%;
-		--popover-foreground: 211.3 58.97% 92.35%;
-
-		--secondary: 212.22 61.36% 17.25%;
-		--secondary-foreground: 0 0% 100%;
-
-		--muted: 240 12.28% 11.18%;
-		--muted-foreground: 240 1.2% 60.78%;
-
-		--accent: 212.22 61.36% 17.25%;
-		--accent-foreground: 211.3 58.97% 92.35%;
-
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 210 40% 98%;
-
-		--border: 0 0% 14.9%;
-		--input: 0 0% 14.9%;
-		--ring: 211.56 61.6% 49.02%;
-
-		--radius: 0.5rem;
-	}
+  /* This FORCES Dark Mode to also be Pale Pink */
+  .dark {
+    --background: 327 100% 94%; 
+    --foreground: 327 95% 10%;
+    --primary: 327 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --card: 327 100% 90%;
+    --border: 327 100% 85%;
+  }
 }
 
 @layer base {
