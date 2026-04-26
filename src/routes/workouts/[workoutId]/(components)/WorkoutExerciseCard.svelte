@@ -4,7 +4,8 @@
 	import { convertCamelCaseToNormal } from '$lib/utils';
 	import type { Prisma } from '@prisma/client';
 	import MiniSetIcon from 'virtual:icons/lucide/arrow-down-right';
-	import RepPicker from '$lib/components/RepPicker.svelte';
+	// Swapped RepPicker for NumpadPicker
+	import NumpadPicker from '$lib/components/NumpadPicker.svelte';
 
 	type PropsType = {
 		exercise: Prisma.WorkoutExerciseGetPayload<{
@@ -59,7 +60,7 @@
 					<Table.Cell class="px-1 py-1.5 font-medium">{set.setIndex + 1}</Table.Cell>
 					{#if !set.skipped}
 						<Table.Cell class="p-1">
-							<RepPicker bind:value={set.reps} label="Reps" />
+							<NumpadPicker bind:value={set.reps} allowDecimal={false} />
 						</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">
 							<div class="flex items-center justify-center rounded-md border bg-background/50 h-10">
@@ -84,7 +85,7 @@
 							{miniSet.miniSetIndex + 1}
 						</Table.Cell>
 						<Table.Cell class="p-1">
-							<RepPicker bind:value={miniSet.reps} label="Reps" />
+							<NumpadPicker bind:value={miniSet.reps} allowDecimal={false} />
 						</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">{miniSet.load}</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">{miniSet.RIR}</Table.Cell>
