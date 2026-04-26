@@ -2,7 +2,6 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { ModeWatcher } from 'mode-watcher';
 	import { onMount } from 'svelte';
-	import { pwaInfo } from 'virtual:pwa-info';
 	import '../app.pcss';
 	import DesktopLayout from './(components)/layout/DesktopLayout.svelte';
 	import MobileLayout from './(components)/layout/MobileLayout.svelte';
@@ -13,7 +12,6 @@
 	overrideItemIdKeyNameBeforeInitialisingDndZones('name');
 
 	const { children } = $props();
-	const webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 	let isMobile: undefined | boolean = $state(undefined);
 
 	onMount(() => {
@@ -23,11 +21,6 @@
 		});
 	});
 </script>
-
-<svelte:head>
-	<!-- eslint-disable -->
-	{@html webManifestLink}
-</svelte:head>
 
 <ModeWatcher />
 <Toaster />
