@@ -1,38 +1,17 @@
-import { browser } from '$app/environment';
-import { useRegisterSW } from 'virtual:pwa-register/svelte';
+import { writable } from 'svelte/store';
 
-let checkForUpdates: (() => Promise<void>) | null = null;
+// 1. Mock the PWA stores so the rest of the app doesn't crash
+export const needRefresh = writable(false);
+export const offlineReady = writable(false);
 
-const sw = browser
-	? useRegisterSW({
-			onRegisteredSW(swUrl, r) {
-				checkForUpdates = async () => {
-					if (!r) return;
-					if (!navigator || r.installing) return;
-					if ('connection' in navigator && !navigator.onLine) return;
+// 2. Mock the update function so buttons tied to it do nothing instead of breaking
+export const updateServiceWorker = async (reloadPage?: boolean) => {
+    console.log('PWA is disabled, skipping service worker update.');
+};
 
-					const resp = await fetch(swUrl, {
-						cache: 'no-store',
-						headers: {
-							cache: 'no-store',
-							'cache-control': 'no-cache'
-						}
-					});
-					if (resp.status === 200) await r.update();
-				};
-
-				if (r) setInterval(checkForUpdates, 3600000);
-				console.log(`SW Registered: ${r}`);
-			},
-			onRegisterError(error) {
-				console.log('SW registration error', error);
-			}
-		})
-	: null;
-
-export const needRefresh = sw?.needRefresh;
-export const updateServiceWorker = sw?.updateServiceWorker;
-export const offlineReady = sw?.offlineReady;
+// 3. Keep your custom data loss dialog state exactly as it was
 export const updateDataLossDialog = $state({ open: false });
 
+// 4. Mock the check function
+let checkForUpdates: (() => Promise<void>) | null = async () => {};
 export { checkForUpdates };
