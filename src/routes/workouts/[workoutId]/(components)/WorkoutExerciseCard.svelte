@@ -4,6 +4,7 @@
 	import { convertCamelCaseToNormal } from '$lib/utils';
 	import type { Prisma } from '@prisma/client';
 	import MiniSetIcon from 'virtual:icons/lucide/arrow-down-right';
+	import RepPicker from '$lib/RepPicker.svelte';
 
 	type PropsType = {
 		exercise: Prisma.WorkoutExerciseGetPayload<{
@@ -16,7 +17,7 @@
 
 <div class="flex flex-col gap-0.5 rounded-md border bg-card/50 p-2 backdrop-blur-sm">
 	<div class="flex items-center justify-between">
-		<span class="truncate">{exercise.name}</span>
+		<span class="truncate font-bold">{exercise.name}</span>
 		{#if date}
 			<span class="text-sm text-muted-foreground">
 				{new Date(date).toLocaleDateString()}
@@ -39,13 +40,13 @@
 		</Badge>
 	</div>
 	{#if exercise.note}
-		<div class="mt-1 flex items-center bg-secondary px-1 py-0.5 text-sm">
+		<div class="mt-1 flex items-center bg-secondary px-1 py-0.5 text-sm italic">
 			{exercise.note}
 		</div>
 	{/if}
 	<Table.Root class="mt-1">
 		<Table.Header>
-			<Table.Row class="h-2 border-none bg-secondary">
+			<Table.Row class="h-2 border-none bg-secondary/50">
 				<Table.Head class="h-7 w-5"></Table.Head>
 				<Table.Head class="h-7 text-center text-foreground">Reps</Table.Head>
 				<Table.Head class="h-7 text-center text-foreground">Load</Table.Head>
@@ -57,9 +58,19 @@
 				<Table.Row class="border-none">
 					<Table.Cell class="px-1 py-1.5 font-medium">{set.setIndex + 1}</Table.Cell>
 					{#if !set.skipped}
-						<Table.Cell class="px-1 py-1.5 text-center font-light">{set.reps}</Table.Cell>
-						<Table.Cell class="px-1 py-1.5 text-center font-light">{set.load}</Table.Cell>
-						<Table.Cell class="px-1 py-1.5 text-center font-light">{set.RIR}</Table.Cell>
+						<Table.Cell class="p-1">
+							<RepPicker bind:value={set.reps} label="Reps" />
+						</Table.Cell>
+						<Table.Cell class="px-1 py-1.5 text-center font-light">
+							<div class="flex items-center justify-center rounded-md border bg-background/50 h-10">
+								{set.load}
+							</div>
+						</Table.Cell>
+						<Table.Cell class="px-1 py-1.5 text-center font-light">
+							<div class="flex items-center justify-center rounded-md border bg-background/50 h-10">
+								{set.RIR}
+							</div>
+						</Table.Cell>
 					{:else}
 						<Table.Cell colspan={3} class="px-1 py-1.5 text-center italic text-muted-foreground">
 							<span>skipped</span>
@@ -67,12 +78,14 @@
 					{/if}
 				</Table.Row>
 				{#each set.miniSets as miniSet}
-					<Table.Row class="border-none bg-muted/50">
+					<Table.Row class="border-none bg-muted/30">
 						<Table.Cell class="flex items-center px-1 py-1.5 font-medium">
 							<MiniSetIcon />
 							{miniSet.miniSetIndex + 1}
 						</Table.Cell>
-						<Table.Cell class="px-1 py-1.5 text-center font-light">{miniSet.reps}</Table.Cell>
+						<Table.Cell class="p-1">
+							<RepPicker bind:value={miniSet.reps} label="Reps" />
+						</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">{miniSet.load}</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">{miniSet.RIR}</Table.Cell>
 					</Table.Row>
