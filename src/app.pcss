@@ -3,32 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-  /* This covers Light Mode */
-  :root {
-    --background: 327 100% 94%; /* The pale pastel pink you wanted */
-    --foreground: 327 95% 10%; /* Dark plum text for readability */
+	:root {
+		/* Main backdrop */
+		--background: 327 100% 94%;
+		--foreground: 327 95% 10%;
 
-    --primary: 327 100% 55%; /* Bright Barbie Pink buttons */
-    --primary-foreground: 0 0% 100%;
+		/* PRIMARY BARBIE PINK */
+		--primary: 327 100% 55%;
+		--primary-foreground: 0 0% 100%;
 
-    --card: 327 100% 90%; 
-    --card-foreground: 327 95% 10%;
+		/* SOLID LAYERS (The Transparency Fix) */
+		--card: 327 100% 90%;
+		--card-foreground: 327 95% 10%;
+		--popover: 327 100% 88%; /* Solid and slightly darker so it pops */
+		--popover-foreground: 327 95% 10%;
 
-    --border: 327 100% 85%;
-    --input: 327 100% 85%;
-    --ring: 327 100% 55%;
-    --radius: 1.25rem;
-  }
+		/* UI ELEMENTS */
+		--secondary: 327 100% 80%;
+		--secondary-foreground: 327 95% 20%;
+		--muted: 327 60% 85%;
+		--muted-foreground: 327 40% 30%;
+		--accent: 327 100% 80%;
+		--accent-foreground: 327 100% 40%;
 
-  /* This FORCES Dark Mode to also be Pale Pink */
-  .dark {
-    --background: 327 100% 94%; 
-    --foreground: 327 95% 10%;
-    --primary: 327 100% 55%;
-    --primary-foreground: 0 0% 100%;
-    --card: 327 100% 90%;
-    --border: 327 100% 85%;
-  }
+		--border: 327 100% 80%;
+		--input: 327 100% 80%;
+		--ring: 327 100% 55%;
+		--radius: 1.25rem;
+	}
+
+	/* Force Dark Mode to stay in the Pink Dreamhouse */
+	.dark {
+		--background: 327 100% 94%;
+		--foreground: 327 95% 10%;
+		--primary: 327 100% 55%;
+		--primary-foreground: 0 0% 100%;
+		--card: 327 100% 90%;
+		--popover: 327 100% 88%;
+		--border: 327 100% 80%;
+		--muted: 327 60% 85%;
+		--accent: 327 100% 80%;
+	}
 }
 
 @layer base {
@@ -52,6 +67,7 @@ body {
 	@apply flex !h-screen w-screen flex-col lg:flex-row;
 }
 
+/* UI Skeletons & Utilities */
 .text-lg-skeleton {
 	@apply h-7 w-28;
 }

@@ -24,7 +24,7 @@
 		"@sveltejs/kit": "^2.49.5",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.13",
-		"@types/node": "^22.0.2",
+		"@types/node": "^22.19.17",
 		"@typescript-eslint/parser": "^8.0.0",
 		"@vite-pwa/sveltekit": "^0.6.0",
 		"autoprefixer": "^10.4.19",
@@ -51,8 +51,9 @@
 		"svelte-dnd-action": "^0.9.49",
 		"svelte-sonner": "^0.3.28",
 		"tailwindcss": "^3.4.4",
+		"ts-node": "^10.9.2",
 		"tslib": "^2.6.3",
-		"typescript": "^5.5.3",
+		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.0.0",
 		"unplugin-icons": "^22.0.0",
 		"vaul-svelte": "^0.3.2",
@@ -80,5 +81,8 @@
 		"tailwind-variants": "^0.3.0",
 		"trpc-sveltekit": "^3.6.2",
 		"trpc-transformer": "^3.2.2"
+	},
+	"prisma": {
+		"seed": "node --loader ts-node/esm ./prisma/seed.ts"
 	}
 }
