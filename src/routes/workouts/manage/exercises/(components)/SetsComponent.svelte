@@ -17,8 +17,9 @@
 	import TargetIcon from 'virtual:icons/lucide/target';
 	import UndoIcon from 'virtual:icons/lucide/undo';
 	import { workoutRunes } from '../../workoutRunes.svelte';
-	// ADDED: Import our custom RepPicker component
-	import RepPicker from '$lib/components/RepPicker.svelte'; 
+	
+	// ONLY the NumpadPicker now!
+	import NumpadPicker from '$lib/components/NumpadPicker.svelte';
 
 	type PropsType = { exercise: WorkoutExerciseInProgress; originalSetLoads: (number | undefined)[] };
 	type WorkoutExerciseSet = WorkoutExerciseInProgress['sets'][number];
@@ -211,31 +212,29 @@
 				</div>
 			{/if}
 			{#if !set.skipped}
-				<RepPicker
+				<NumpadPicker
 					id="{exercise.name}-set-{idx + 1}-reps"
 					disabled={set.completed || set.skipped}
+					allowDecimal={false}
 					bind:value={set.reps}
 				/>
 				
 				{#if idx === 0 || !isSameLoadExercise}
-					<Input
+					<NumpadPicker
 						id="{exercise.name}-set-{idx + 1}-load"
 						disabled={set.completed || set.skipped}
-						min={exercise.bodyweightFraction ? undefined : 0.25}
 						placeholder={getNextLoad(idx)}
-						required
-						step={0.25}
-						type="number"
+						allowDecimal={true}
 						bind:value={set.load}
 					/>
 				{:else}
 					<span></span>
 				{/if}
-				<Input
+				
+				<NumpadPicker
 					id="{exercise.name}-set-{idx + 1}-RIR"
 					disabled={set.completed || set.skipped}
-					required
-					type="number"
+					allowDecimal={false}
 					bind:value={set.RIR}
 				/>
 			{:else}
@@ -291,9 +290,10 @@
 					</Button>
 				{:else}
 					<form class="contents" onsubmit={(e) => completeMiniSet(e, set, miniIdx)}>
-						<RepPicker
+						<NumpadPicker
 							id="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-reps"
 							disabled={miniSet.completed}
+							allowDecimal={false}
 							bind:value={miniSet.reps}
 						/>
 
@@ -301,24 +301,22 @@
 							<span></span>
 						{:else}
 							{@const expectedLoad = getMiniSetLoad(idx, miniIdx)}
-							<Input
+							<NumpadPicker
 								id="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-load"
 								disabled={miniSet.completed}
-								min={exercise.bodyweightFraction ? undefined : 0}
 								placeholder={expectedLoad === undefined ? expectedLoad : expectedLoad.toString()}
-								required
-								step={0.25}
-								type="number"
+								allowDecimal={true}
 								bind:value={miniSet.load}
 							/>
 						{/if}
-						<Input
+						
+						<NumpadPicker
 							id="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-RIR"
 							disabled={miniSet.completed}
-							required
-							type="number"
+							allowDecimal={false}
 							bind:value={miniSet.RIR}
 						/>
+						
 						<Button
 							class="place-self-end"
 							data-testid="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-action"
