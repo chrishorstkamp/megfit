@@ -1,7 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import Icons from 'unplugin-icons/vite';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 export default defineConfig({
 	optimizeDeps: {
@@ -58,43 +57,6 @@ export default defineConfig({
 	},
 	plugins: [
 		sveltekit(),
-		SvelteKitPWA({
-			srcDir: 'src',
-			filename: 'service-worker.ts',
-			strategies: 'injectManifest',
-			registerType: 'autoUpdate',
-			scope: '/',
-			base: '/',
-			manifest: {
-				id: '/?app=megfit',
-				name: 'MegFit',
-				short_name: 'MegFit',
-				start_url: '/',
-				display: 'standalone',
-				background_color: '#fdf2f8', // Barbie Pink Background
-				theme_color: '#ec4899', // Barbie Pink Theme
-				orientation: 'portrait',
-				description: "Megan's Custom Fitness Tracker",
-				icons: [
-					{
-						src: 'android/android-launchericon-512-512.png',
-						sizes: '512x512',
-						type: 'image/png'
-					},
-					{
-						src: 'android/android-launchericon-192-192.png',
-						sizes: '192x192',
-						type: 'image/png'
-					}
-				]
-			},
-			injectManifest: {
-				globPatterns: ['client/**/*.{js,css,ico,png,svg,ttf,webp,webmanifest,woff}', 'prerendered/**/*.html']
-			},
-			kit: {
-				includeVersionFile: true
-			}
-		}),
 		Icons({
 			compiler: 'svelte',
 			defaultClass: 'pointer-events-none'
