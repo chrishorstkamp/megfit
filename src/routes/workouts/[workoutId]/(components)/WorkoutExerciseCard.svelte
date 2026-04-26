@@ -4,7 +4,7 @@
 	import { convertCamelCaseToNormal } from '$lib/utils';
 	import type { Prisma } from '@prisma/client';
 	import MiniSetIcon from 'virtual:icons/lucide/arrow-down-right';
-	import RepPicker from '$lib/RepPicker.svelte';
+	import RepPicker from '$lib/components/RepPicker.svelte';
 
 	type PropsType = {
 		exercise: Prisma.WorkoutExerciseGetPayload<{
