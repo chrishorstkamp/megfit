@@ -17,6 +17,8 @@
 	import TargetIcon from 'virtual:icons/lucide/target';
 	import UndoIcon from 'virtual:icons/lucide/undo';
 	import { workoutRunes } from '../../workoutRunes.svelte';
+	// ADDED: Import our custom RepPicker component
+	import RepPicker from '$lib/components/RepPicker.svelte'; 
 
 	type PropsType = { exercise: WorkoutExerciseInProgress; originalSetLoads: (number | undefined)[] };
 	type WorkoutExerciseSet = WorkoutExerciseInProgress['sets'][number];
@@ -209,14 +211,12 @@
 				</div>
 			{/if}
 			{#if !set.skipped}
-				<Input
+				<RepPicker
 					id="{exercise.name}-set-{idx + 1}-reps"
 					disabled={set.completed || set.skipped}
-					min={1}
-					required
-					type="number"
 					bind:value={set.reps}
 				/>
+				
 				{#if idx === 0 || !isSameLoadExercise}
 					<Input
 						id="{exercise.name}-set-{idx + 1}-load"
@@ -291,14 +291,12 @@
 					</Button>
 				{:else}
 					<form class="contents" onsubmit={(e) => completeMiniSet(e, set, miniIdx)}>
-						<Input
+						<RepPicker
 							id="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-reps"
 							disabled={miniSet.completed}
-							min={1}
-							required
-							type="number"
 							bind:value={miniSet.reps}
 						/>
+
 						{#if exercise.setType === 'MyorepMatch' || exercise.setType === 'MyorepMatchDown'}
 							<span></span>
 						{:else}
