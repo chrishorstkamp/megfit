@@ -20,7 +20,7 @@ MyFit is a progressive web application (PWA) for tracking workouts and managing 
 
 - **API Layer**: tRPC for end-to-end type-safe APIs
 - **Authentication**: Auth.js (formerly NextAuth) with Google and GitHub OAuth providers
-- **Database**: CockroachDB (PostgreSQL-compatible)
+- **Database**: PostgreSQL (hosted on Neon)
 - **ORM**: Prisma 6.0 with multi-file schema organization
 - **Legacy Data**: MongoDB for V2 data migration support
 
@@ -342,7 +342,8 @@ The application implements a custom service worker strategy:
 
 **Environment Variables**:
 
-- `DATABASE_URL`: CockroachDB connection string
+- `DATABASE_URL`: Neon PostgreSQL pooled connection string
+- `DIRECT_URL`: Neon PostgreSQL direct connection string (used by Prisma CLI for migrations)
 - `MONGODB_URI`: Legacy V2 database (optional)
 - `AUTH_SECRET`: Auth.js secret key
 - `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`: GitHub OAuth
@@ -362,7 +363,7 @@ The application implements a custom service worker strategy:
 
 ## Future Architecture Considerations
 
-**Scalability**: CockroachDB provides horizontal scaling capabilities for growing user base
+**Scalability**: Neon provides serverless autoscaling and scale-to-zero for the database layer
 
 **Observability**: Structured for future addition of logging, monitoring, and analytics
 
