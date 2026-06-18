@@ -1,27 +1,8 @@
-import { SvelteKitAuth } from '@auth/sveltekit';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
-import github from '@auth/sveltekit/providers/github';
-import google from '@auth/sveltekit/providers/google';
 import { createContext } from '$lib/trpc/context';
 import { router } from '$lib/trpc/router';
 import { createTRPCHandle } from 'trpc-sveltekit';
 import { sequence } from '@sveltejs/kit/hooks';
-
-const prisma = new PrismaClient();
-
-const { handle: authHandle } = SvelteKitAuth({
-	adapter: PrismaAdapter(prisma),
-	basePath: '/auth',
-	providers: [google, github],
-	trustHost: true,
-	callbacks: {
-		session({ session, user }) {
-			session.userId = user.id;
-			return session;
-		}
-	}
-});
+import type { Handle } from '@sveltejs/kit';
 
 const trpcHandle = createTRPCHandle({
 	router,
@@ -30,20 +11,13 @@ const trpcHandle = createTRPCHandle({
 		console.error(`Encountered error while trying to process ${type} @ ${path}:`, error)
 });
 
-const meganMode: any = async ({ event, resolve }) => {
-	const user = {
-		id: "txdfz3nduruk0ajgbubukgpx",
-		name: "Megan",
-		email: "megan@example.com",
+// Single-user mode: authenticate every request as the app owner.
+const meganMode: Handle = async ({ event, resolve }) => {
+	const session = {
+		user: { id: 'txdfz3nduruk0ajgbubukgpx', name: 'Megan', email: 'megan@example.com' },
+		expires: '2999-12-31T23:59:59.999Z'
 	};
-
-	event.locals.user = user;
-	event.locals.session = { user, userId: user.id };
-	
-	// These two lines satisfy the "Internal Error" you're seeing
-	event.locals.auth = async () => event.locals.session;
-	event.locals.getSession = async () => event.locals.session;
-
+	event.locals.auth = async () => session;
 	return resolve(event);
 };
 

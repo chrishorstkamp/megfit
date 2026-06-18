@@ -5,13 +5,13 @@ export const needRefresh = writable(false);
 export const offlineReady = writable(false);
 
 // 2. Mock the update function so buttons tied to it do nothing instead of breaking
-export const updateServiceWorker = async (reloadPage?: boolean) => {
-    console.log('PWA is disabled, skipping service worker update.');
+export const updateServiceWorker = async (_reloadPage?: boolean) => {
+	console.log('PWA is disabled, skipping service worker update.');
 };
 
 // 3. Keep your custom data loss dialog state exactly as it was
 export const updateDataLossDialog = $state({ open: false });
 
 // 4. Mock the check function
-let checkForUpdates: (() => Promise<void>) | null = async () => {};
+const checkForUpdates: (() => Promise<void>) | null = async () => {};
 export { checkForUpdates };

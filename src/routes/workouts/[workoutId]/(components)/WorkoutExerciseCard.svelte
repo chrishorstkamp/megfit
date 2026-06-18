@@ -63,12 +63,12 @@
 							<NumpadPicker bind:value={set.reps} allowDecimal={false} />
 						</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">
-							<div class="flex items-center justify-center rounded-md border bg-background/50 h-10">
+							<div class="flex h-10 items-center justify-center rounded-md border bg-background/50">
 								{set.load}
 							</div>
 						</Table.Cell>
 						<Table.Cell class="px-1 py-1.5 text-center font-light">
-							<div class="flex items-center justify-center rounded-md border bg-background/50 h-10">
+							<div class="flex h-10 items-center justify-center rounded-md border bg-background/50">
 								{set.RIR}
 							</div>
 						</Table.Cell>

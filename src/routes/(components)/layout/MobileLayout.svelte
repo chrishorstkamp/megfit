@@ -35,7 +35,7 @@
 					}}
 				>
 					<Button class="pointer-events-none justify-start gap-2 text-foreground" variant="link">
-						<HeartIcon class="text-primary h-10 w-10" /> 
+						<HeartIcon class="h-10 w-10 text-primary" />
 						<h1 class="text-2xl font-bold">MegFit</h1>
 					</Button>
 				</Sheet.Title>
@@ -50,7 +50,7 @@
 				<LoaderCircle class="animate-spin text-primary" height={24} width={24} />
 			</div>
 		{:else}
-			<HeartIcon class="text-primary h-8 w-8" />
+			<HeartIcon class="h-8 w-8 text-primary" />
 			<span class="text-lg font-bold">MegFit</span>
 		{/if}
 	</a>

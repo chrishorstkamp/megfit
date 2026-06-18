@@ -25,17 +25,17 @@ function createWorkoutRunes() {
 	let exerciseWarmUpDialogExercise: WorkoutExerciseInProgress | undefined = $state();
 
 	if (typeof window !== 'undefined' && window.localStorage) {
-	const savedState = window.localStorage.getItem('workoutRunes');
-	if (savedState) ({ workoutData, workoutExercises, previousWorkoutData } = JSON.parse(savedState));
-}
+		const savedState = window.localStorage.getItem('workoutRunes');
+		if (savedState) ({ workoutData, workoutExercises, previousWorkoutData } = JSON.parse(savedState));
+	}
 
-function saveStoresToLocalStorage() {
-	if (typeof window === 'undefined' || !window.localStorage) return;
-	window.localStorage.setItem(
-		'workoutRunes',
-		JSON.stringify({ workoutData, workoutExercises, editingWorkoutId, previousWorkoutData })
-	);
-}
+	function saveStoresToLocalStorage() {
+		if (typeof window === 'undefined' || !window.localStorage) return;
+		window.localStorage.setItem(
+			'workoutRunes',
+			JSON.stringify({ workoutData, workoutExercises, editingWorkoutId, previousWorkoutData })
+		);
+	}
 
 	function resetStores() {
 		workoutData = null;

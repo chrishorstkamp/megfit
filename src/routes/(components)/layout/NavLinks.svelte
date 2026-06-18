@@ -12,8 +12,7 @@
 		{ text: 'Exercise splits', href: '/exercise-splits' },
 		{ text: 'Mesocycles', href: '/mesocycles' },
 		{ text: 'Workouts', href: '/workouts' },
-		null,
-
+		null
 	];
 </script>
 

@@ -24,14 +24,14 @@
 				<LoaderCircle class="animate-spin text-primary" height={48} width={48} />
 			</div>
 		{:else}
-			<HeartIcon class="text-primary h-10 w-10" /> 
+			<HeartIcon class="h-10 w-10 text-primary" />
 			<h1 class="text-2xl font-bold">MegFit</h1>
 		{/if}
 	</Button>
 
 	<NavLinks />
 
-	<div class="flex gap-1 mt-auto pb-4">
+	<div class="mt-auto flex gap-1 pb-4">
 		<ModeToggle size="lg" variant="outline" />
 		<PWAButtons isMobile={false} />
 	</div>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import { Input } from '$lib/components/ui/input';
 	import * as Popover from '$lib/components/ui/popover';
 	import { Separator } from '$lib/components/ui/separator';
 	import { arraySum, floorToNearestMultiple } from '$lib/utils';
@@ -17,7 +16,7 @@
 	import TargetIcon from 'virtual:icons/lucide/target';
 	import UndoIcon from 'virtual:icons/lucide/undo';
 	import { workoutRunes } from '../../workoutRunes.svelte';
-	
+
 	// ONLY the NumpadPicker now!
 	import NumpadPicker from '$lib/components/NumpadPicker.svelte';
 
@@ -218,7 +217,7 @@
 					allowDecimal={false}
 					bind:value={set.reps}
 				/>
-				
+
 				{#if idx === 0 || !isSameLoadExercise}
 					<NumpadPicker
 						id="{exercise.name}-set-{idx + 1}-load"
@@ -230,7 +229,7 @@
 				{:else}
 					<span></span>
 				{/if}
-				
+
 				<NumpadPicker
 					id="{exercise.name}-set-{idx + 1}-RIR"
 					disabled={set.completed || set.skipped}
@@ -309,14 +308,14 @@
 								bind:value={miniSet.load}
 							/>
 						{/if}
-						
+
 						<NumpadPicker
 							id="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-RIR"
 							disabled={miniSet.completed}
 							allowDecimal={false}
 							bind:value={miniSet.RIR}
 						/>
-						
+
 						<Button
 							class="place-self-end"
 							data-testid="{exercise.name}-set-{idx + 1}-mini-set-{miniIdx + 1}-action"
