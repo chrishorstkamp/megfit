@@ -7,7 +7,6 @@
 	import UserAvatar from './UserAvatar.svelte';
 	import UserDropdown from './UserDropdown.svelte';
 	import NavLinks from './NavLinks.svelte';
-	import LoginProviderMenu from './LoginProviderMenu.svelte';
 	import PWAButtons from './PWAButtons.svelte';
 
 	import MenuIcon from 'virtual:icons/lucide/menu';
@@ -66,13 +65,6 @@
 				</Button>
 			</DropdownMenu.Trigger>
 			<UserDropdown />
-		</DropdownMenu.Root>
-	{:else}
-		<DropdownMenu.Root>
-			<DropdownMenu.Trigger asChild let:builder>
-				<Button builders={[builder]} size="sm" variant="ghost">Login</Button>
-			</DropdownMenu.Trigger>
-			<LoginProviderMenu />
 		</DropdownMenu.Root>
 	{/if}
 </header>

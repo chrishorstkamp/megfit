@@ -6,7 +6,6 @@
 	import UserAvatar from './UserAvatar.svelte';
 	import UserDropdown from './UserDropdown.svelte';
 	import NavLinks from './NavLinks.svelte';
-	import LoginProviderMenu from './LoginProviderMenu.svelte';
 	import PWAButtons from './PWAButtons.svelte';
 
 	import LoaderCircle from 'virtual:icons/lucide/loader-circle';
@@ -45,13 +44,6 @@
 				</Button>
 			</DropdownMenu.Trigger>
 			<UserDropdown />
-		</DropdownMenu.Root>
-	{:else}
-		<DropdownMenu.Root>
-			<DropdownMenu.Trigger asChild let:builder>
-				<Button class="mt-1 justify-around text-base" builders={[builder]} size="lg" variant="outline">Login</Button>
-			</DropdownMenu.Trigger>
-			<LoginProviderMenu />
 		</DropdownMenu.Root>
 	{/if}
 </header>

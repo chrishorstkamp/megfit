@@ -22,7 +22,7 @@
 		</div>
 		<CarouselComponent />
 		<StatsComponent {...counts} />
-		<ActionButtons {...counts} />
+		<ActionButtons />
 		<Features />
 		<Faq class="col-span-2" />
 	</div>

@@ -18,7 +18,7 @@
 	</span>
 	<CarouselComponent />
 	<StatsComponent {...counts} />
-	<ActionButtons {...counts} />
+	<ActionButtons />
 	<Features />
 	<Faq />
 </div>
