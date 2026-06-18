@@ -6,6 +6,8 @@ model WorkoutOfMesocycle {
   workoutStatus WorkoutStatus?
   workout       Workout        @relation(fields: [workoutId], references: [id], onDelete: Cascade)
   mesocycle     Mesocycle      @relation(fields: [mesocycleId], references: [id], onDelete: Cascade)
+
+  @@index([mesocycleId])
 }
 
 model Workout {
@@ -18,6 +20,8 @@ model Workout {
   workoutExercises   WorkoutExercise[]
   userId             String
   note               String?
+
+  @@index([userId, startedAt])
 }
 
 model WorkoutExercise {
@@ -42,6 +46,8 @@ model WorkoutExercise {
   minimumWeightChange Float?
   topRepRangeStart    Int?
   topRepRangeEnd      Int?
+
+  @@index([workoutId])
 }
 
 model WorkoutExerciseSet {
@@ -54,6 +60,8 @@ model WorkoutExerciseSet {
   RIR               Int
   skipped           Boolean
   miniSets          WorkoutExerciseMiniSet[]
+
+  @@index([workoutExerciseId])
 }
 
 model WorkoutExerciseMiniSet {
@@ -64,4 +72,6 @@ model WorkoutExerciseMiniSet {
   RIR                  Int
   parentSet            WorkoutExerciseSet @relation(fields: [workoutExerciseSetId], references: [id], onDelete: Cascade)
   workoutExerciseSetId String
+
+  @@index([workoutExerciseSetId])
 }

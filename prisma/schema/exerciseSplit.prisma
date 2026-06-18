@@ -5,6 +5,8 @@ model ExerciseSplit {
   userId            String
   exerciseSplitDays ExerciseSplitDay[]
   usedByMesocycles  Mesocycle[]
+
+  @@index([userId])
 }
 
 model ExerciseSplitDay {
@@ -15,6 +17,8 @@ model ExerciseSplitDay {
   exercises       ExerciseTemplate[]
   exerciseSplit   ExerciseSplit      @relation(fields: [exerciseSplitId], references: [id], onDelete: Cascade)
   exerciseSplitId String
+
+  @@index([exerciseSplitId])
 }
 
 model ExerciseTemplate {
@@ -34,4 +38,6 @@ model ExerciseTemplate {
   exerciseSplitDayId String
   topRepRangeStart   Int?
   topRepRangeEnd     Int?
+
+  @@index([exerciseSplitDayId])
 }

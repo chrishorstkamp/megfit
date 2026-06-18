@@ -1,6 +1,6 @@
 import { createContext } from '$lib/trpc/context';
 import { createCaller } from '$lib/trpc/router';
-import { error } from 'console';
+import { error } from '@sveltejs/kit';
 
 export const load = async (event) => {
 	event.depends('workouts:all');
@@ -14,7 +14,6 @@ export const load = async (event) => {
 
 	return {
 		todaysWorkoutData: trpc.workouts.getTodaysWorkoutData(),
-		pastWorkouts: trpc.mesocycles.getWorkouts('nextSplitDay'),
-		entityCounts: trpc.users.getEntityCounts()
+		pastWorkouts: trpc.mesocycles.getWorkouts('nextSplitDay')
 	};
 };

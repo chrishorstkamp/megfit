@@ -14,6 +14,9 @@ model Mesocycle {
   mesocycleExerciseSplitDays MesocycleExerciseSplitDay[]
   mesocycleCyclicSetChanges  MesocycleCyclicSetChange[]
   workoutsOfMesocycle        WorkoutOfMesocycle[]
+
+  @@index([userId])
+  @@index([exerciseSplitId])
 }
 
 model MesocycleCyclicSetChange {
@@ -25,6 +28,8 @@ model MesocycleCyclicSetChange {
   regardlessOfProgress Boolean
   setIncreaseAmount    Int
   maxVolume            Int
+
+  @@index([mesocycleId])
 }
 
 model MesocycleExerciseSplitDay {
@@ -35,6 +40,8 @@ model MesocycleExerciseSplitDay {
   mesocycle                  Mesocycle                   @relation(fields: [mesocycleId], references: [id], onDelete: Cascade)
   mesocycleId                String
   mesocycleSplitDayExercises MesocycleExerciseTemplate[]
+
+  @@index([mesocycleId])
 }
 
 model MesocycleExerciseTemplate {
@@ -59,4 +66,6 @@ model MesocycleExerciseTemplate {
   minimumWeightChange         Float?
   topRepRangeStart            Int?
   topRepRangeEnd              Int?
+
+  @@index([mesocycleExerciseSplitDayId])
 }
