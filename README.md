@@ -1,102 +1,65 @@
-# [MyFit](https://myfit.fit/)
+# MegFit
 
-![overview](https://github.com/user-attachments/assets/5290df63-ba02-49b1-93c8-9706046bd176)
+A personal workout tracker for logging reps, load and RIR (reps in reserve), organizing training into exercise splits and mesocycles, and suggesting progressive overload for the next session.
 
-A web-based workout tracking application designed to help users track their workouts, monitor progression, and optimize their training. The app supports detailed logging of reps, load, and RIR (Reps in Reserve) across weeks, with complex progression formulas built in to help users progressively overload their exercises.
+MegFit runs in single-user mode: there is no login, and every request is treated as one user (see `meganMode` in `src/hooks.server.ts`).
 
-## Direct link
+## Stack
 
-For web app access, use the [direct link](https://myfit.fit/). Can be installed on device through supported browsers and platforms, recommended browser is Google Chrome.
+- [SvelteKit](https://kit.svelte.dev/) app, deployed on [Vercel](https://vercel.com/)
+- [tRPC](https://trpc.io/) API between the pages and the server
+- PostgreSQL on [Neon](https://neon.tech/), accessed through [Prisma](https://www.prisma.io/)
 
-## Features
+## Local development
 
-- Track workouts with detailed logs for reps, load, and RIR
-- Automatic progressive overload calculations based on past performance
-- User-friendly interface built with SvelteKit
-- Backend API using tRPC for seamless communication between frontend and backend
-- PostgreSQL database (hosted on Neon) managed by Prisma for reliable data storage
-- Comprehensive testing suite using Playwright for end-to-end testing
+Requires Node.js 20 or 22.
 
-## Getting Started
-
-Follow these instructions to get a copy of the project up and running on your local machine.
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v20.16.0 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/WhyAsh5114/MyFit.git
-   cd MyFit
-   ```
-
-2. Install dependencies:
+1. Install dependencies:
 
    ```bash
    npm ci
    ```
 
-3. Set up environment variables:
+2. Copy `sample.env` to `.env` and fill in the Neon connection strings (`DATABASE_URL` and `DIRECT_URL`).
 
-   - Copy `sample.env` to `.env` and configure the required values, including your Neon PostgreSQL connection details (`DATABASE_URL` and `DIRECT_URL`).
+   **The database in `.env` is the one the app reads and writes.** If it points at the production database, anything you do locally changes real data.
 
-4. Set up the database (PostgreSQL via Neon):
+3. For a new, empty database, apply the schema and create the app's user:
 
-   - [Create a free Neon project](https://neon.tech) and copy the pooled and direct connection strings into `.env`.
-   - Run Prisma migrations to set up the database schema:
-     ```bash
-     npx prisma migrate deploy
-     ```
-   - Seed the initial user:
-     ```bash
-     npx prisma db seed
-     ```
+   ```bash
+   npx prisma migrate deploy
+   ```
 
-5. Start the development server:
+   ```bash
+   npx prisma db seed
+   ```
+
+4. Start the dev server and open `http://localhost:5173`:
 
    ```bash
    npm run dev
    ```
 
-6. Open the app in your browser at `http://localhost:5173`.
-
-### Running Tests
-
-To run the test suite, use the following command:
+## Checks
 
 ```bash
-npm run test
+npm run lint
 ```
 
-This will execute the Playwright end-to-end tests and any unit tests.
+```bash
+npm run check
+```
 
-## Usage
+```bash
+npm test
+```
 
-Once the app is running, you can create an account, log your workouts, and track your progress over time. The app will automatically calculate progressive overload to help optimize your training.
+`npm test` runs the progression unit tests in `tests/`. They need no browser or database. GitHub Actions runs all three checks on every push to `main`.
 
-### Key Concepts:
+## Database changes
 
-- **Progressive Overload**: The app uses built-in formulas to adjust your workout plan based on your previous performance, helping you to continually challenge yourself and make progress.
-- **RIR (Reps in Reserve)**: You can log your perceived effort for each set to fine-tune your training intensity.
+Vercel does not run migrations. After changing the schema in `prisma/schema/`, create a migration and apply it to the production database yourself with `npx prisma migrate deploy`.
 
-## Contributing
+## License and credits
 
-We welcome contributions! Please see our [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to contribute to this project.
-
-## Security
-
-If you discover a security vulnerability, please follow our [SECURITY.md](./SECURITY.md) guidelines on reporting issues responsibly.
-
-## License
-
-This project is licensed under the GNU Affero General Public License v3.0. See the [LICENSE](./LICENSE) file for more details.
-
-## Acknowledgements
-
-- Special thanks to the open-source community for their contributions to the tools and libraries used in this project.
+MegFit is based on [MyFit](https://github.com/WhyAsh5114/MyFit) by WhyAsh5114 and is licensed under the GNU Affero General Public License v3.0. See [LICENSE](./LICENSE).
