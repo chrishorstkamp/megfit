@@ -29,7 +29,7 @@
 			<Sheet.Header class="items-start">
 				<Sheet.Title
 					onclick={async () => {
-						await goto('/?forceView');
+						await goto('/dashboard');
 						sheetOpen = false;
 					}}
 				>

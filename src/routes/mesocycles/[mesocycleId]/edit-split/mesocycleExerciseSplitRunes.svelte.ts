@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import type { MesocycleExerciseTemplateWithoutIdsOrIndex } from '$lib/components/mesocycleAndExerciseSplit/commonTypes';
 import type { RouterOutputs } from '$lib/trpc/router';
 import type { Prisma } from '@prisma/client';
@@ -22,7 +23,7 @@ export function createMesocycleExerciseSplitRunes() {
 	let editingExercise: MesocycleExerciseTemplateWithoutIdsOrIndex | undefined = $state(undefined);
 	let copiedExercises: MesocycleExerciseTemplateWithoutIdsOrIndex[] | undefined = $state(undefined);
 
-	if (globalThis.localStorage) {
+	if (browser) {
 		const savedState = localStorage.getItem('mesocycleExerciseSplitRunes');
 		if (savedState) ({ splitDays, splitExercises, mesocycle } = JSON.parse(savedState));
 	}

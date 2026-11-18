@@ -95,10 +95,4 @@
 		for a mesocycle and overridden for individual exercises. To do so: Mesocycles > [your mesocycle name] > Split tab >
 		Edit. Currently, for lengthened partials, you can add a note to each exercise.
 	</p>
-
-	<h2 class="italic">"I need more help!"</h2>
-	<p>
-		Feel free to <a href="https://github.com/WhyAsh5114/issues">open an issue</a> on the GitHub repository, will be glad
-		to help you out and add more details to the docs
-	</p>
 </div>

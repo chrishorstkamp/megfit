@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 type Notification = {
 	title: string;
 	description?: string;
@@ -8,7 +9,7 @@ function createSettingsRunes() {
 	let pushNotificationsEnabled = $state(false);
 	let notifications = $state<Notification[]>([]);
 
-	if (globalThis.localStorage && globalThis.Notification) {
+	if (browser && globalThis.Notification) {
 		const savedState = localStorage.getItem('settingsRunes');
 		if (savedState) ({ notifications } = JSON.parse(savedState));
 		pushNotificationsEnabled = Notification.permission === 'granted';

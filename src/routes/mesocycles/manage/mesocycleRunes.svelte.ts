@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { MuscleGroup, type Prisma, type Mesocycle } from '@prisma/client';
 import type { FullExerciseSplit } from '../../exercise-splits/manage/exerciseSplitRunes.svelte';
 
@@ -34,7 +35,7 @@ export function createMesocycleRunes() {
 	let minSets = $state(2);
 	let editingMesocycleId: string | null = $state(null);
 
-	if (globalThis.localStorage) {
+	if (browser) {
 		const savedState = localStorage.getItem('mesocycleRunes');
 		if (savedState)
 			({
