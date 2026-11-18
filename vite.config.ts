@@ -1,12 +1,11 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import Icons from 'unplugin-icons/vite';
 
 export default defineConfig({
 	optimizeDeps: {
 		include: [
 			'paneforge',
-			'posthog-js',
 			'tailwind-variants',
 			'chart.js',
 			'@internationalized/date',
@@ -33,9 +32,6 @@ export default defineConfig({
 			'@trpc/client',
 			'vaul-svelte',
 			'cmdk-sv',
-			'embla-carousel',
-			'embla-carousel-svelte',
-			'embla-carousel-reactive-utils',
 			'@auth/prisma-adapter',
 			'@auth/sveltekit/providers/github',
 			'@auth/sveltekit/providers/google',
@@ -46,14 +42,15 @@ export default defineConfig({
 			'@trpc/server',
 			'@auth/sveltekit',
 			'set-cookie-parser',
-			'marked',
-			'dompurify',
 			'chartjs-adapter-date-fns'
 		]
 	},
 	define: {
 		'process.env.NODE_ENV': process.env.NODE_ENV === 'production' ? '"production"' : '"development"',
 		'import.meta.env.VERCEL_ANALYTICS_ID': JSON.stringify(process.env.VERCEL_ANALYTICS_ID)
+	},
+	test: {
+		include: ['tests/**/*.test.ts']
 	},
 	plugins: [
 		sveltekit(),
